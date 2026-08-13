@@ -473,11 +473,11 @@ function renderMap(){
   if(myCards()===0||!me.seenGuide){
     h+='<div class="guide"><h2>はじめかた</h2>'
       +'<p>ひとマスが「困りごと × 時期」ひとつぶん。気になったマスに、調べたことを貼っていきます。'
-      +'ひとりで全部やる必要はありません。1日1枚で十分です。</p>'
+      +'ひとりで全部やる必要はありません◎</p>'
       +'<div class="steps">'
       +'<div class="step"><i>1</i><div>気になるマスを1つえらぶ（うすい色のマスほど、まだ誰も見ていません）</div></div>'
       +'<div class="step"><i>2</i><div>読んだページの<b>URLを貼る</b>。本文はコピペのままでOK。まとめなくて大丈夫</div></div>'
-      +'<div class="step"><i>3</i><div>わからなかったことを一言残す。それが次の人へのバトンになります</div></div>'
+      +'<div class="step"><i>3</i><div>わからなかったこと・メモを一言残してねっ</div></div>'
       +'</div><button class="primary" onclick="startPick()">マスをえらぶ</button>'
       +(myCards()>0?'<div style="text-align:center;margin-top:9px"><button class="guidelink" onclick="hideGuide()">もう出さない</button></div>':'')
       +'</div>';
@@ -485,7 +485,7 @@ function renderMap(){
     h+='<p class="empty" style="margin:-4px 0 10px"><button class="guidelink" onclick="showGuide()">つかいかたを見る</button></p>';
   }
 
-  if(picking) h+='<div class="pickbanner">どこのこと？ 地図のマスをえらんでね<button onclick="cancelPick()">やめる</button></div>';
+  if(picking) h+='<div class="pickbanner">今日はだれを助けよう？ 地図のマスをえらんでね<button onclick="cancelPick()">やめる</button></div>';
 
   h+='<div class="boardbox"><div class="grid" style="--ncol:'+(data.axes.length+(canExpand?1:0))+'"><div class="hd"></div>';
   data.axes.forEach(function(a){h+='<div class="hd">'+esc(a.label)+'</div>'});
