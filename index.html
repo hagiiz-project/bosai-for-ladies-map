@@ -25,14 +25,14 @@ body.tex-sousa{background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.10) 0
 .gatemap{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;width:150px;margin:0 auto 24px}
 .gatemap i{aspect-ratio:1.2/1;border:1px solid var(--edge);border-radius:4px;background:var(--frontier)}
 .gatemap i.on{background:var(--accent);border-color:var(--accent)}
-.gatetitle{font-size:31px;font-weight:800;letter-spacing:.03em;margin:0 0 10px;line-height:1.25}
+.gatetitle{font-size:clamp(21px,6.2vw,29px);font-weight:800;letter-spacing:.02em;margin:0 0 10px;line-height:1.35}
 .gatelead{font-size:13.5px;line-height:1.9;color:var(--dim);margin:0 0 26px}
 .gatewrap label{text-align:left}
 .gatefoot{font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:20px}
 .gatefoot button{background:none;border:0;color:var(--accent2);font-size:10.5px;cursor:pointer;padding:0;text-decoration:underline}
 
 .bar{display:flex;align-items:center;gap:6px;padding:2px 0 12px;flex-wrap:wrap}
-.brand{font-size:18px;font-weight:800;letter-spacing:.03em;line-height:1.2;cursor:pointer}
+.brand{font-size:clamp(14px,3.6vw,18px);font-weight:800;letter-spacing:.02em;line-height:1.3;cursor:pointer;flex:1 1 180px}
 .brand small{display:block;font-size:10px;font-weight:400;color:var(--dim);letter-spacing:.06em;margin-top:2px}
 .spacer{flex:1}
 button{font-family:inherit}
@@ -171,6 +171,8 @@ body.tex-dot .fab{border-radius:0;box-shadow:4px 4px 0 var(--edge)}
 .err{color:var(--accent);font-size:12px;line-height:1.7;margin-top:10px;font-weight:600}
 .radio{display:flex;align-items:flex-start;gap:8px;padding:8px 0;font-size:13px;line-height:1.5;cursor:pointer}
 .radio input{width:auto;flex:0 0 auto;margin-top:3px}
+.hello{background:var(--bg);border:1.5px solid var(--accent);border-radius:12px;
+  padding:11px 13px;font-size:12.5px;line-height:1.7;margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -244,17 +246,40 @@ var LS={get:function(k){try{return localStorage.getItem(k)}catch(e){return mem[k
         set:function(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}};
 
 var data={domains:SEED.domains,axes:SEED.axes,stages:SEED.stages,situations:SEED.situations,
-  cards:[],summaries:{},echoes:[],themes:SEED.themes,fonts:SEED.fonts,texts:{},fixCounts:{}};
-var me={name:"",theme:"momo",font:"maru",texture:"flat",lang:"n",pass:"",seenGuide:false};
+  cards:[],summaries:{},echoes:[],themes:SEED.themes,fonts:SEED.fonts,texts:{},fixCounts:{},prefs:{}};
+var me={name:"",theme:"momo",font:"maru",texture:"flat",lang:"n",pass:"",seenGuide:false,customized:false};
 var view={t:"map"};
 var modal=null,flash="",picking=false,loadErr="",loadedFonts={},authed=false,gateErr="",gateBusy=false;
+var prefTimer=null;
 
+/* 呼び名ごとに見た目を覚える（同じ端末で複数人が使っても混ざらない） */
+function prefKey(){return "rfl5_pref_"+encodeURIComponent(me.name||"_")}
 function loadMe(){
   var r=LS.get("rfl5_me");if(r){try{me=Object.assign(me,JSON.parse(r))}catch(e){}}
   var u=LS.get("rfl5_gas");if(u)GAS_URL=u;
   authed=LS.get("rfl5_authed")==="1"&&!!me.name&&!!me.pass;
+  if(me.name) applyLocalPref();
 }
-function saveMe(){LS.set("rfl5_me",JSON.stringify(me))}
+function applyLocalPref(){
+  var p=LS.get(prefKey());
+  if(p){try{
+    var o=JSON.parse(p);
+    ["theme","font","texture","lang"].forEach(function(k){if(o[k])me[k]=o[k]});
+    if(o.customized)me.customized=true;
+  }catch(e){}}
+}
+function saveMe(){
+  LS.set("rfl5_me",JSON.stringify(me));
+  LS.set(prefKey(),JSON.stringify({theme:me.theme,font:me.font,texture:me.texture,lang:me.lang,customized:me.customized}));
+}
+/* サーバー側が対応していれば、別の端末でも同じ見た目になる（未対応でも静かに無視） */
+function savePrefs(){
+  if(prefTimer)clearTimeout(prefTimer);
+  prefTimer=setTimeout(function(){
+    api("setPrefs",{theme:me.theme,font:me.font,texture:me.texture,lang:me.lang})
+      .catch(function(){});
+  },900);
+}
 function T(k,def){
   var s=data.texts&&data.texts[k];
   if(s&&s[me.lang])return s[me.lang];
@@ -333,12 +358,19 @@ function api(action,payload){
     body:JSON.stringify(Object.assign({action:action,pass:me.pass,author:me.name},payload))})
     .then(parseRes).then(function(j){if(!j.ok)throw new Error(j.error||"保存に失敗");return j});
 }
+function applyServerPref(){
+  var p=data.prefs&&data.prefs[me.name];
+  if(!p)return false;
+  ["theme","font","texture","lang"].forEach(function(k){if(p[k])me[k]=p[k]});
+  me.customized=true;saveMe();
+  return true;
+}
 function pull(){
   return api("get").then(function(j){
     if(j&&j.domains){
       ["domains","axes","stages","situations","themes","fonts"].forEach(function(k){if(j[k]&&j[k].length)data[k]=j[k]});
       data.cards=j.cards||[];data.summaries=j.summaries||{};data.echoes=j.echoes||[];
-      data.texts=j.texts||{};data.fixCounts=j.fixCounts||{};
+      data.texts=j.texts||{};data.fixCounts=j.fixCounts||{};data.prefs=j.prefs||{};
       LS.set("rfl5_cache",JSON.stringify(data));loadErr="";
     }
     render();
@@ -437,10 +469,17 @@ function doEnter(){
   if(!p){gateErr="合言葉を入れてください。";renderGate();return}
   if(!GAS_URL){gateErr="保存先が未設定です。下の「保存先を設定」から入れてください。";renderGate();return}
   me.name=n;me.pass=p;gateBusy=true;gateErr="";renderGate();
+  applyLocalPref();
   api("get").then(function(j){
     gateBusy=false;
     if(!j||!j.domains){gateErr="うまく読み込めませんでした。";renderGate();return}
-    authed=true;saveMe();LS.set("rfl5_authed","1");route();pull();
+    authed=true;
+    data.prefs=j.prefs||{};
+    applyServerPref();          // 別の端末で設定していれば、それを引き継ぐ
+    saveMe();LS.set("rfl5_authed","1");
+    route();render();
+    if(!me.customized) open_("look",{onboard:true});   // 初回だけ、着せかえから始まる
+    pull();
   }).catch(function(e){
     gateBusy=false;gateErr=/合言葉/.test(e.message)?"合言葉がちがいます。":e.message;renderGate();
   });
@@ -453,7 +492,7 @@ function header(){
   return '<div class="bar"><div class="brand" onclick="goMap()">'+esc(BRAND.title)
     +'<small>'+esc(BRAND.sub)+'</small></div><div class="spacer"></div>'
     +'<button class="ghost" onclick="open_(\'me\')">Lv'+lv.lv+' '+esc(lvTitle(lv))+'</button>'
-    +'<button class="ghost" onclick="open_(\'look\')">見た目</button>'
+    +'<button class="ghost" onclick="open_(\'look\')">自分色</button>'
     +'<button class="ghost" onclick="pull()">更新</button></div>'
     +(loadErr?'<p class="err">'+esc(loadErr)+' <button class="ghost" onclick="open_(\'setup\')">設定</button></p>':'');
 }
@@ -544,7 +583,6 @@ function renderCell(){
   h+='</div><p class="state"><b>'+FILL[z.s]+'</b>　カード '+z.n+'枚 ／ '+z.people+'人 ／ 出どころ '+z.srcs+'件<br>'
     +esc(nudge(z,!!sum))+'</p></div>';
 
-  /* 誰の目で見えているか */
   h+='<div class="sect"><div class="secth">この場所は、誰の目で見えている？</div>'
     +'<p class="sectp">集まったカードをAIが読んで、どの人の状況について書かれているかを見立てた結果です。'
     +'<b>ゼロのところは、この場所についてその人のことがまだ調べられていない</b>ということ。</p>';
@@ -607,14 +645,22 @@ function judgeHTML(c){
     +'<div><button class="take" onclick="open_(\'correct\',{cardId:\''+c.id+'\'})">ちがう気がする</button></div></div>';
 }
 
-function setLensNoop(){}
 function startPick(){picking=true;goMap();render();window.scrollTo({top:0,behavior:"smooth"})}
 function cancelPick(){picking=false;render()}
 function hideGuide(){me.seenGuide=true;saveMe();render()}
 function showGuide(){me.seenGuide=false;saveMe();render();window.scrollTo({top:0,behavior:"smooth"})}
 function tapCell(d,a){if(picking){picking=false;goCell(d,a);setTimeout(function(){openCard(d,a,"")},80);return}goCell(d,a)}
 function open_(t,x){modal=Object.assign({t:t},x||{});renderModal()}
-function close_(){modal=null;renderModal()}
+function close_(){
+  if(modal&&modal.t==="look"&&modal.onboard&&!me.customized){me.customized=true;saveMe();savePrefs()}
+  modal=null;renderModal();
+}
+function finishLook(){
+  me.customized=true;saveMe();savePrefs();
+  var was=modal&&modal.onboard;
+  modal=null;renderModal();
+  if(was) toast("いってらっしゃい、"+me.name+"！　まずは気になるマスを1つえらんでね");
+}
 function openCard(d,a,ans){open_("card",{d:d,a:a,answers:ans||""})}
 function toast(m){document.getElementById("toast").innerHTML='<div class="toast">'+esc(m)+'</div>';
   setTimeout(function(){document.getElementById("toast").innerHTML=""},5000)}
@@ -690,7 +736,10 @@ function renderModal(){
   }
 
   if(modal.t==="look"){
-    body='<h3>見た目とことば</h3><p class="sub">地図の位置と並びは全員そろえたまま、色・書体・質感・ことばだけ変わります。</p>'
+    body='<h3>自分色にカスタマイズしようっ！</h3>';
+    if(modal.onboard) body+='<div class="hello">ようこそ、<b>'+esc(me.name)+'</b> さん！<br>'
+      +'まずは見た目を自分好みにしてね。地図の並びはみんな同じだけど、色と書体と質感は自由です。あとからいつでも変えられます。</div>';
+    body+='<p class="sub">えらんだ見た目は <b>'+esc(me.name||"あなた")+'</b> の設定として覚えます。</p>'
       +'<label>ことば</label><div class="chips">'
       +'<button class="chip" aria-pressed="'+(me.lang==="y")+'" onclick="pick(\'lang\',\'y\')">やさしい</button>'
       +'<button class="chip" aria-pressed="'+(me.lang==="n")+'" onclick="pick(\'lang\',\'n\')">ふつう</button></div>'
@@ -707,7 +756,7 @@ function renderModal(){
     Object.keys(TEXTURES).forEach(function(k2){
       body+='<button class="chip" aria-pressed="'+(me.texture===k2)+'" onclick="pick(\'texture\',\''+k2+'\')">'+TEXTURES[k2]+'</button>'});
     body+='</div><p class="src" style="margin-top:14px">質感はすべてCSSで描いた自前の模様です。既存ゲームの画像・書体は使っていません。</p>';
-    foot='<button class="primary" onclick="close_()">閉じる</button>';
+    foot='<button class="primary" onclick="finishLook()">'+(modal.onboard?"これで はじめる！":"これでOK")+'</button>';
   }
 
   m.innerHTML=sheetWrap(body,foot);
@@ -720,7 +769,16 @@ function updateSrcCount(){
   var list=splitSources(val("f_src")),u=new Set(list.map(normUrl));u.delete("");
   el.textContent=list.length?"出どころ "+u.size+"件として数えます":"";
 }
-function pick(k,v){me[k]=v;saveMe();authed?render():renderGate()}
+function pick(k,v){
+  me[k]=v;saveMe();
+  if(authed)savePrefs();
+  if(authed&&!modal)render(); else {applyTheme();renderModal();if(authed)renderCurrent()}
+}
+function renderCurrent(){
+  var keep=modal;modal=null;
+  if(view.t==="cell")renderCell();else renderMap();
+  modal=keep;renderModal();
+}
 function toggleChip(id){var b=document.getElementById("ck_"+id);b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true")}
 function doSetup(){GAS_URL=val("f_gas").trim();LS.set("rfl5_gas",GAS_URL);close_();authed?pull():renderGate()}
 function doMe(){me.name=val("f_myname").trim()||me.name;saveMe();close_();render()}
@@ -738,7 +796,7 @@ function doCard(){
       var msg=before.s===0?"🗺 "+me.name+" が【"+labelOf(data.domains,d)+" × "+labelOf(data.axes,a)+"】をはじめて塗りました。+"+pts
                           :labelOf(data.domains,d)+" × "+labelOf(data.axes,a)+" が濃くなりました。+"+pts;
       if(j.judged===false)msg+="（AIの見立てはあとで入ります）";
-      close_();toast(msg);return pull();
+      modal=null;renderModal();toast(msg);return pull();
     })
     .catch(function(e){
       b.disabled=false;b.textContent="地図に置く";
@@ -756,7 +814,7 @@ function doCorrect(){
   if(why==="その他"&&!note){err.textContent="「その他」のときは、ひとこと書いてください。";return}
   var b=document.getElementById("btn_fix");b.disabled=true;b.textContent="送っています…";
   api("addCorrection",{cardId:modal.cardId,after:after,why:why,note:note})
-    .then(function(){close_();toast("✏️ "+me.name+" がAIの見立てを直しました。+5");return pull()})
+    .then(function(){modal=null;renderModal();toast("✏️ "+me.name+" がAIの見立てを直しました。+5");return pull()})
     .catch(function(e){b.disabled=false;b.textContent="直す（+5）";err.textContent="送れませんでした："+e.message});
 }
 function doComment(id){
@@ -771,12 +829,12 @@ function doSummary(){
 }
 function doAdd(kind){
   var v=val("f_label").trim();if(!v)return;
-  api(kind,{label:v}).then(function(){close_();toast("「"+v+"」が地図に加わりました。名づけたのは "+me.name+"。");return pull()})
+  api(kind,{label:v}).then(function(){modal=null;renderModal();toast("「"+v+"」が地図に加わりました。名づけたのは "+me.name+"。");return pull()})
     .catch(function(e){toast("送れませんでした："+e.message)});
 }
 function doEcho(){
   var w=val("f_what").trim(),r=val("f_where").trim();if(!w||!r)return;
-  api("addEcho",{what:w,where:r}).then(function(){close_();toast("反響を記録しました。");return pull()})
+  api("addEcho",{what:w,where:r}).then(function(){modal=null;renderModal();toast("反響を記録しました。");return pull()})
     .catch(function(e){toast("送れませんでした："+e.message)});
 }
 
