@@ -217,7 +217,7 @@ var SEED = {
 };
 var TEXTURES={flat:"フラット",dot:"ドット",kougo:"方眼",kami:"紙",sousa:"走査線"};
 var LEVELS=[
-  {lv:1,need:0,  key:"lv.1",title:"しらべる",   unlock:"カードを出す／AIの見立てを直す"},
+  {lv:1,need:0,  key:"lv.1",title:"しらべる",   unlock:"報告する／AIの見立てを直す"},
   {lv:2,need:30, key:"lv.2",title:"読み合う",   unlock:"ほかの人のカードにコメントできる"},
   {lv:3,need:80, key:"lv.3",title:"問いを立てる",unlock:"地図に新しい領域・時期・ライフステージを足せる"},
   {lv:4,need:160,key:"lv.4",title:"まとめる",   unlock:"マスの要約を書ける"},
@@ -522,7 +522,7 @@ function renderMap(){
   h+='<p class="empty" style="margin-top:16px">地図・カード・見立ての直しは、みんなで共有しています。'
     +'<br><button class="ghost" style="margin-top:8px" onclick="open_(\'setup\')">保存先の設定</button> '
     +'<button class="ghost" style="margin-top:8px" onclick="logout()">出る</button></p></div>'
-    +'<button class="fab" onclick="startPick()">＋ カードを出す</button>';
+    +'<button class="fab" onclick="startPick()">＋ 報告する</button>';
   document.getElementById("app").innerHTML=h;
 }
 
