@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>まもれてない地図</title>
+<title>守る地図</title>
 <meta name="robots" content="noindex">
 <style>
 *{box-sizing:border-box}
@@ -21,21 +21,18 @@ body.tex-kami{background-image:
 body.tex-sousa{background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.10) 0 1px,transparent 1px 4px)}
 .wrap{max-width:860px;margin:0 auto;padding:12px 12px 0}
 
-/* ---- 表紙 ---- */
 .gatewrap{width:100%;max-width:400px;padding:24px 20px;margin:auto;text-align:center}
 .gatemap{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;width:150px;margin:0 auto 24px}
 .gatemap i{aspect-ratio:1.2/1;border:1px solid var(--edge);border-radius:4px;background:var(--frontier)}
 .gatemap i.on{background:var(--accent);border-color:var(--accent)}
-.gatetitle{font-size:30px;font-weight:800;letter-spacing:.02em;margin:0 0 10px;line-height:1.25}
+.gatetitle{font-size:31px;font-weight:800;letter-spacing:.03em;margin:0 0 10px;line-height:1.25}
 .gatelead{font-size:13.5px;line-height:1.9;color:var(--dim);margin:0 0 26px}
-.gatelead b{color:var(--accent);font-weight:800}
 .gatewrap label{text-align:left}
 .gatefoot{font-size:10.5px;color:var(--dim);line-height:1.9;margin-top:20px}
 .gatefoot button{background:none;border:0;color:var(--accent2);font-size:10.5px;cursor:pointer;padding:0;text-decoration:underline}
 
-/* ---- ヘッダ ---- */
-.bar{display:flex;align-items:center;gap:6px;padding:2px 0 10px;flex-wrap:wrap}
-.brand{font-size:17px;font-weight:800;letter-spacing:.02em;line-height:1.2}
+.bar{display:flex;align-items:center;gap:6px;padding:2px 0 12px;flex-wrap:wrap}
+.brand{font-size:18px;font-weight:800;letter-spacing:.03em;line-height:1.2;cursor:pointer}
 .brand small{display:block;font-size:10px;font-weight:400;color:var(--dim);letter-spacing:.06em;margin-top:2px}
 .spacer{flex:1}
 button{font-family:inherit}
@@ -43,46 +40,37 @@ button{font-family:inherit}
   padding:6px 11px;font-size:11px;cursor:pointer;font-weight:600}
 .ghost:hover{color:var(--ink);border-color:var(--accent)}
 
-/* ---- ヒーロー ---- */
-.hero{background:var(--panel);border:1.5px solid var(--edge);border-radius:16px;padding:13px 14px;margin-bottom:10px}
-body.tex-dot .hero{border-radius:0;box-shadow:3px 3px 0 var(--edge)}
-.herotop{display:flex;align-items:baseline;gap:8px;margin-bottom:9px;flex-wrap:wrap}
-.herotop b{font-size:15px;font-weight:800}
-.herotop em{font-style:normal;font-size:11.5px;color:var(--dim);margin-left:auto}
-.bigbar{display:flex;gap:3px;height:14px}
-.bigbar i{flex:1;background:var(--frontier);border-radius:3px;border:1px solid var(--edge)}
-.bigbar i.f1{background:color-mix(in srgb,var(--accent) 35%,var(--frontier));border-color:transparent}
-.bigbar i.f2{background:color-mix(in srgb,var(--accent) 60%,var(--frontier));border-color:transparent}
-.bigbar i.f3{background:color-mix(in srgb,var(--accent) 82%,var(--frontier));border-color:transparent}
-.bigbar i.f4{background:var(--accent);border-color:transparent}
-.herofoot{font-size:11.5px;color:var(--dim);margin-top:9px;line-height:1.7}
-.herofoot b{color:var(--ink)}
+/* はじめかた */
+.guide{background:var(--panel);border:1.5px solid var(--accent);border-radius:16px;padding:14px 15px;margin-bottom:12px}
+body.tex-dot .guide{border-radius:0;box-shadow:3px 3px 0 var(--edge)}
+.guide h2{margin:0 0 4px;font-size:15px;font-weight:800}
+.guide p{margin:0 0 11px;font-size:12px;color:var(--dim);line-height:1.75}
+.steps{display:flex;flex-direction:column;gap:7px;margin-bottom:13px}
+.step{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.6}
+.step i{flex:0 0 20px;height:20px;border-radius:50%;background:var(--accent);color:var(--onaccent);
+  font-style:normal;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.guide .primary{width:100%}
+.guidelink{background:none;border:0;color:var(--accent2);font-size:11.5px;cursor:pointer;
+  text-decoration:underline;padding:0;font-weight:600}
 
-/* ---- レンズ ---- */
-.lensblock{margin-bottom:10px}
-.lenslabel{font-size:10px;color:var(--dim);letter-spacing:.14em;margin:8px 0 5px;font-weight:700}
-.lensrow{display:flex;flex-wrap:wrap;gap:5px}
-.lens{border:1.5px solid var(--edge);background:var(--panel);color:var(--dim);
-  border-radius:99px;padding:6px 11px;font-size:11.5px;cursor:pointer;font-weight:600}
-.lens[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--onaccent)}
-
-/* ---- 盤面 ---- */
-.boardbox{background:var(--panel);border:1.5px solid var(--edge);border-radius:16px;padding:10px 10px 8px}
+.boardbox{background:var(--panel);border:1.5px solid var(--edge);border-radius:16px;padding:11px}
 body.tex-dot .boardbox{border-radius:0;box-shadow:3px 3px 0 var(--edge)}
-.grid{display:grid;gap:4px}
-.hd{font-size:11.5px;font-weight:700;color:var(--dim);display:flex;align-items:flex-end;
-  justify-content:center;text-align:center;padding-bottom:3px;line-height:1.2}
-.rowhd{font-size:11.5px;font-weight:700;color:var(--dim);display:flex;align-items:center;
-  justify-content:flex-end;padding-right:5px;text-align:right;line-height:1.25}
-.cell{aspect-ratio:1.3/1;max-height:66px;border:1.5px solid var(--edge);border-radius:9px;
-  background:var(--frontier);cursor:pointer;padding:4px;display:flex;flex-direction:column;
+.grid{display:grid;gap:5px;grid-template-columns:88px repeat(var(--ncol),minmax(0,1fr))}
+.hd{font-size:12px;font-weight:700;color:var(--dim);display:flex;align-items:flex-end;
+  justify-content:center;text-align:center;padding-bottom:4px;line-height:1.2;word-break:keep-all}
+.rowhd{font-size:12px;font-weight:700;color:var(--ink);display:flex;align-items:center;
+  justify-content:flex-end;text-align:right;line-height:1.25;background:var(--frontier);
+  border-radius:9px 3px 3px 9px;padding:4px 8px 4px 5px;word-break:keep-all}
+body.tex-dot .rowhd{border-radius:0}
+.cell{aspect-ratio:1.35/1;max-height:70px;border:1.5px solid var(--edge);border-radius:9px;
+  background:var(--frontier);cursor:pointer;padding:5px;display:flex;flex-direction:column;
   justify-content:space-between;align-items:flex-end;transition:transform .1s ease;overflow:hidden}
 body.tex-dot .cell{border-radius:0;box-shadow:2px 2px 0 var(--edge)}
 .cell:hover{transform:translateY(-2px)}
-.cell:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
-.cell .qmark{font-size:10px;line-height:1;align-self:flex-start}
-.cell .gauge{display:flex;gap:1.5px;width:100%;margin-top:auto}
-.cell .gauge i{flex:1;height:4px;border-radius:2px;background:var(--onfill);opacity:.28}
+.cell:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
+.cell .qmark{font-size:11px;line-height:1;align-self:flex-start}
+.cell .gauge{display:flex;gap:2px;width:100%;margin-top:auto}
+.cell .gauge i{flex:1;height:5px;border-radius:2px;background:var(--onfill);opacity:.3}
 .cell .gauge i.on{opacity:1}
 .cell.f1{background:color-mix(in srgb,var(--accent) 30%,var(--frontier));border-color:transparent}
 .cell.f2{background:color-mix(in srgb,var(--accent) 55%,var(--frontier));border-color:transparent}
@@ -90,19 +78,57 @@ body.tex-dot .cell{border-radius:0;box-shadow:2px 2px 0 var(--edge)}
 .cell.f4{background:var(--accent);border-color:transparent}
 .cell.new{background:transparent;border-style:dashed;opacity:.45}
 body.picking .cell{outline:2px dashed var(--accent2);outline-offset:-3px}
-.pickbanner{background:var(--accent);color:var(--onaccent);border-radius:12px;padding:9px 13px;
-  font-size:12.5px;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:10px}
+.pickbanner{background:var(--accent);color:var(--onaccent);border-radius:12px;padding:10px 13px;
+  font-size:12.5px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .pickbanner button{margin-left:auto;background:none;border:1.5px solid var(--onaccent);
   color:var(--onaccent);border-radius:99px;padding:4px 10px;font-size:11px;cursor:pointer}
 .pulse{animation:pop .5s ease}
 @keyframes pop{0%{transform:scale(.85)}60%{transform:scale(1.1)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.legend{display:flex;flex-wrap:wrap;gap:9px;padding:10px 2px 2px;font-size:10px;color:var(--dim)}
+.legend{display:flex;flex-wrap:wrap;gap:9px;padding:11px 2px 2px;font-size:10.5px;color:var(--dim)}
 .legend span{display:flex;align-items:center;gap:4px}
 .legend i{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid var(--edge)}
-.note{font-size:10.5px;color:var(--dim);text-align:center;padding:7px 4px 0;line-height:1.7}
+.note{font-size:10.5px;color:var(--dim);text-align:center;padding:8px 4px 0;line-height:1.7}
 
-/* ---- ポップアップ（中央） ---- */
+/* マスのページ */
+.back{background:none;border:0;color:var(--accent2);font-size:12.5px;cursor:pointer;
+  padding:0;font-weight:700;margin-bottom:10px}
+.cellhead{background:var(--panel);border:1.5px solid var(--edge);border-radius:16px;padding:14px 15px;margin-bottom:12px}
+body.tex-dot .cellhead{border-radius:0;box-shadow:3px 3px 0 var(--edge)}
+.cellhead h1{margin:0 0 3px;font-size:20px;font-weight:800;line-height:1.3}
+.cellhead .state{font-size:12.5px;color:var(--dim);line-height:1.7;margin:9px 0 0}
+.cellhead .state b{color:var(--ink)}
+.meter{display:flex;gap:3px;margin:10px 0 0}
+.meter i{flex:1;height:9px;background:var(--frontier);border-radius:3px}
+.meter i.on{background:var(--accent)}
+.sect{background:var(--panel);border:1.5px solid var(--edge);border-radius:16px;padding:13px 15px;margin-bottom:12px}
+body.tex-dot .sect{border-radius:0;box-shadow:3px 3px 0 var(--edge)}
+.secth{font-size:12px;font-weight:800;margin:0 0 3px}
+.sectp{font-size:11px;color:var(--dim);line-height:1.7;margin:0 0 11px}
+.srow{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:12px}
+.srow span{flex:0 0 96px;color:var(--dim);font-weight:600}
+.srow .b{flex:1;height:9px;background:var(--frontier);border-radius:4px;overflow:hidden}
+.srow .b i{display:block;height:100%;background:var(--accent)}
+.srow em{font-style:normal;flex:0 0 62px;text-align:right;font-size:10.5px;color:var(--dim)}
+.srow.zero span,.srow.zero em{opacity:.55}
+
+.qbox{background:var(--bg);border-left:3px solid var(--accent2);border-radius:9px;
+  padding:10px 12px;margin-bottom:8px;font-size:12.5px;line-height:1.65}
+.qbox .meta{font-size:10px;color:var(--dim);margin-top:3px}
+.card{border-top:1.5px solid var(--edge);padding:12px 0}
+.card:first-child{border-top:0}
+.raw{font-size:13px;line-height:1.75;margin:0 0 6px;white-space:pre-wrap;word-break:break-word}
+.src{font-size:10.5px;color:var(--dim);word-break:break-all;line-height:1.7}
+.src a{color:var(--accent2)}
+.srclist{margin:0;padding:0;list-style:none}
+.judge{border:1.5px dashed var(--edge);border-radius:11px;padding:9px 11px;margin:9px 0;font-size:11.5px;line-height:1.65}
+.judge b{color:var(--ink)}
+.judge .why{color:var(--dim);display:block;margin-top:3px}
+.judge .fixed{color:var(--accent2);font-weight:800}
+.take{background:var(--accent2);color:var(--onaccent2);border:0;border-radius:99px;
+  padding:7px 13px;font-size:11.5px;cursor:pointer;font-weight:700;margin-top:8px}
+.take:disabled{opacity:.4;cursor:not-allowed}
+
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;
   justify-content:center;z-index:40;padding:14px}
 .sheet{background:var(--panel);color:var(--ink);width:100%;max-width:520px;max-height:86vh;
@@ -113,7 +139,7 @@ body.tex-dot .sheet{border-radius:0}
 .sheet h3{margin:0 0 4px;font-size:17px;font-weight:800}
 .sheet .sub{font-size:11.5px;color:var(--dim);margin:0 0 12px;line-height:1.7}
 label{display:block;font-size:11px;color:var(--dim);margin:13px 0 4px;letter-spacing:.05em;font-weight:700}
-input,select,textarea{width:100%;background:var(--bg);color:var(--ink);border:1.5px solid var(--edge);
+input,textarea{width:100%;background:var(--bg);color:var(--ink);border:1.5px solid var(--edge);
   border-radius:11px;padding:10px;font-size:16px;font-family:inherit}
 body.tex-dot input,body.tex-dot textarea{border-radius:0}
 textarea{resize:vertical;line-height:1.6}
@@ -129,24 +155,6 @@ input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px;bo
 .chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--onaccent)}
 .chip.warn{border-color:var(--accent2)}
 .sw{width:13px;height:13px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:-2px}
-.card{border-top:1.5px solid var(--edge);padding:12px 0}
-.raw{font-size:13px;line-height:1.7;margin:0 0 6px;white-space:pre-wrap;word-break:break-word}
-.src{font-size:10.5px;color:var(--dim);word-break:break-all;line-height:1.65}
-.src a{color:var(--accent2)}
-.srclist{margin:0;padding:0;list-style:none}
-.judge{border:1.5px dashed var(--edge);border-radius:11px;padding:8px 10px;margin:8px 0;font-size:11.5px;line-height:1.6}
-.judge b{color:var(--ink)}
-.judge .why{color:var(--dim);display:block;margin-top:3px}
-.judge .fixed{color:var(--accent2);font-weight:800}
-.take{background:var(--accent2);color:var(--onaccent2);border:0;border-radius:99px;
-  padding:7px 13px;font-size:11.5px;cursor:pointer;font-weight:700;margin-top:7px}
-.take:disabled{opacity:.4;cursor:not-allowed}
-.meter{display:flex;gap:3px;margin:9px 0 5px}
-.meter i{flex:1;height:8px;background:var(--frontier);border-radius:3px}
-.meter i.on{background:var(--accent)}
-.qbox{background:var(--bg);border-left:3px solid var(--accent2);border-radius:9px;
-  padding:9px 11px;margin-bottom:7px;font-size:12.5px;line-height:1.6}
-.qbox .meta{font-size:10px;color:var(--dim);margin-top:3px}
 .rule{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;
   padding:8px 0;border-bottom:1px dotted var(--edge);line-height:1.5}
 .rule b{color:var(--accent);font-weight:800;white-space:nowrap}
@@ -177,59 +185,52 @@ var GAS_URL = "https://script.google.com/macros/s/AKfycbxVSsOIo-h4bIrbced-ehK_9i
 
 /* ============================================================
    ↓ ② 名前とことば。ここだけ直せば全画面が変わります。
-      （最終的には、メンバー自身に決めてもらうことをおすすめします）
    ============================================================ */
 var BRAND = {
-  title: "まもれてない地図",
+  title: "守る地図",
   sub:   "ぼうさい女子会",
-  lead:  "災害のとき、女の子や女の人が困ることを調べて、地図に置いていく。<br><b>白いところは、まだ誰も守れていない場所。</b>",
-  heroLabel: "まもれてない場所"
+  lead:  "災害のとき、みんなが困ることを調べて、地図に置いていく。"
 };
 
 var SEED = {
   domains:[{id:"d1",label:"生活環境"},{id:"d2",label:"救援物資"},{id:"d3",label:"心身の健康"},
     {id:"d4",label:"安全"},{id:"d5",label:"性別役割"},{id:"d6",label:"お金と仕事"},
-    {id:"d7",label:"決める場"},{id:"d8",label:"復興期の関係"}],
+    {id:"d7",label:"決める場"},{id:"d8",label:"復興期"}],
   axes:[{id:"a1",label:"平時"},{id:"a2",label:"直後"},{id:"a3",label:"避難生活"},{id:"a4",label:"復興期"}],
   stages:[{id:"s1",label:"学齢・思春期"},{id:"s2",label:"就労期"},{id:"s3",label:"妊娠・出産期"},
     {id:"s4",label:"育児期"},{id:"s5",label:"介護期"},{id:"s6",label:"更年期"},{id:"s7",label:"高齢期"}],
   situations:[{id:"g1",label:"障害"},{id:"g2",label:"持病"},{id:"g3",label:"単身"},
     {id:"g4",label:"性的マイノリティ"},{id:"g5",label:"外国籍"},{id:"g6",label:"ケアの担い手"}],
   themes:[
-    {id:"momo",   label:"ももソーダ",   bg:"#FFF0F5",accent:"#FF4F87"},
-    {id:"lemon",  label:"レモネード",   bg:"#FFFBEA",accent:"#FFA400"},
-    {id:"mint",   label:"ミントソーダ", bg:"#EBFBF5",accent:"#00C39A"},
-    {id:"lavender",label:"ラベンダー",  bg:"#F3F0FF",accent:"#7C5CFF"},
-    {id:"sora",   label:"そらいろ",     bg:"#EDF6FF",accent:"#2E9BFF"},
-    {id:"neon",   label:"ネオン",       bg:"#12101C",accent:"#FF57C8"},
-    {id:"yozora", label:"よぞら",       bg:"#141A32",accent:"#FFC46B"},
-    {id:"hakuboku",label:"白墨",        bg:"#F7F7F5",accent:"#333330"}],
+    {id:"momo",label:"ももソーダ",bg:"#FFF0F5",accent:"#FF4F87"},
+    {id:"lemon",label:"レモネード",bg:"#FFFBEA",accent:"#FFA400"},
+    {id:"mint",label:"ミントソーダ",bg:"#EBFBF5",accent:"#00C39A"},
+    {id:"lavender",label:"ラベンダー",bg:"#F3F0FF",accent:"#7C5CFF"},
+    {id:"sora",label:"そらいろ",bg:"#EDF6FF",accent:"#2E9BFF"},
+    {id:"neon",label:"ネオン",bg:"#12101C",accent:"#FF57C8"},
+    {id:"yozora",label:"よぞら",bg:"#141A32",accent:"#FFC46B"},
+    {id:"hakuboku",label:"白墨",bg:"#F7F7F5",accent:"#333330"}],
   fonts:[{id:"maru",label:"丸ゴシック",stack:'"Hiragino Maru Gothic ProN","M PLUS Rounded 1c","Yu Gothic",sans-serif',url:""},
     {id:"gothic",label:"ゴシック",stack:'"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif',url:""},
     {id:"mincho",label:"明朝",stack:'"Hiragino Mincho ProN","Yu Mincho",serif',url:""},
     {id:"tohaba",label:"等幅",stack:'ui-monospace,Menlo,"Osaka-Mono",monospace',url:""}]
 };
 var TEXTURES={flat:"フラット",dot:"ドット",kougo:"方眼",kami:"紙",sousa:"走査線"};
-
 var LEVELS=[
-  {lv:1,need:0,  key:"lv.1",title:"しらべる",  unlock:"カードを出す／AIの判定を直す"},
-  {lv:2,need:30, key:"lv.2",title:"読み合う",  unlock:"ほかの人のカードにコメントできる"},
+  {lv:1,need:0,  key:"lv.1",title:"しらべる",   unlock:"カードを出す／AIの見立てを直す"},
+  {lv:2,need:30, key:"lv.2",title:"読み合う",   unlock:"ほかの人のカードにコメントできる"},
   {lv:3,need:80, key:"lv.3",title:"問いを立てる",unlock:"地図に新しい領域・時期・ライフステージを足せる"},
-  {lv:4,need:160,key:"lv.4",title:"まとめる",  unlock:"マスの要約を書いて「まとまった」にできる"},
-  {lv:5,need:280,key:"lv.5",title:"場をつくる",unlock:"ワークショップを企画・外部で発表できる"}
+  {lv:4,need:160,key:"lv.4",title:"まとめる",   unlock:"マスの要約を書ける"},
+  {lv:5,need:280,key:"lv.5",title:"場をつくる", unlock:"ワークショップを企画・外部で発表できる"}
 ];
 var POINT_RULES=[
-  ["カードを1枚出す","+10"],
-  ["まだ誰もいないマスに最初に置く","+15"],
-  ["1〜2枚しかないマスに足す","+5"],
-  ["誰かの「わからない」に答える","+12"],
-  ["自分の「わからない」に誰かが答える","+8"],
-  ["AIの判定を直す","+5"]
+  ["カードを1枚出す","+10"],["まだ誰もいないマスに最初に置く","+15"],
+  ["1〜2枚しかないマスに足す","+5"],["誰かの「わからない」に答える","+12"],
+  ["自分の「わからない」に誰かが答える","+8"],["AIの見立てを直す","+5"]
 ];
-var FILL=["まだ白い","1人が見た","何人か見た","しっかり調べた","まとまった"];
+var FILL=["まだ誰も見ていない","1人が見た","何人かで見た","いろんな資料で見た","まとめがある"];
 var REASONS=["本文にその話は出てこない","触れているけど中心じゃない","別のステージと取りちがえてる",
   "この区分に当てはまらない","その他"];
-
 var TEXTS={
   "card.src":{y:"① どこで みた？（URL・いくつでも）",n:"① どこで見た？（URL・複数可）"},
   "card.srcnote":{y:"かいぎょう・スペース・、 で わけて OK。あとから だれも しらべなおせません。",
@@ -244,41 +245,40 @@ var LS={get:function(k){try{return localStorage.getItem(k)}catch(e){return mem[k
 
 var data={domains:SEED.domains,axes:SEED.axes,stages:SEED.stages,situations:SEED.situations,
   cards:[],summaries:{},echoes:[],themes:SEED.themes,fonts:SEED.fonts,texts:{},fixCounts:{}};
-var me={name:"",theme:"momo",font:"maru",texture:"flat",lang:"n",pass:""};
-var lens={type:"all",id:""};
+var me={name:"",theme:"momo",font:"maru",texture:"flat",lang:"n",pass:"",seenGuide:false};
+var view={t:"map"};
 var modal=null,flash="",picking=false,loadErr="",loadedFonts={},authed=false,gateErr="",gateBusy=false;
 
 function loadMe(){
-  var r=LS.get("rfl4_me"); if(r){try{me=Object.assign(me,JSON.parse(r))}catch(e){}}
-  var u=LS.get("rfl4_gas"); if(u) GAS_URL=u;
-  authed=LS.get("rfl4_authed")==="1"&&!!me.name&&!!me.pass;
+  var r=LS.get("rfl5_me");if(r){try{me=Object.assign(me,JSON.parse(r))}catch(e){}}
+  var u=LS.get("rfl5_gas");if(u)GAS_URL=u;
+  authed=LS.get("rfl5_authed")==="1"&&!!me.name&&!!me.pass;
 }
-function saveMe(){LS.set("rfl4_me",JSON.stringify(me))}
+function saveMe(){LS.set("rfl5_me",JSON.stringify(me))}
 function T(k,def){
   var s=data.texts&&data.texts[k];
-  if(s&&s[me.lang]) return s[me.lang];
-  var d=TEXTS[k]; if(d) return d[me.lang]||d.n;
+  if(s&&s[me.lang])return s[me.lang];
+  var d=TEXTS[k];if(d)return d[me.lang]||d.n;
   return def!==undefined?def:k;
 }
-function lvTitle(l){ return T(l.key,l.title) }
+function lvTitle(l){return T(l.key,l.title)}
 
 /* ---------- 出典 ---------- */
 function splitSources(t){
   var out=[];
   String(t||"").split(/[\n\r、，,]+/).forEach(function(seg){
-    seg=seg.trim(); if(!seg) return;
-    if((seg.match(/https?:\/\//gi)||[]).length>1){
-      seg.split(/\s+/).forEach(function(p){p=p.trim();if(p)out.push(p)});
-    } else out.push(seg);
+    seg=seg.trim();if(!seg)return;
+    if((seg.match(/https?:\/\//gi)||[]).length>1){seg.split(/\s+/).forEach(function(p){p=p.trim();if(p)out.push(p)})}
+    else out.push(seg);
   });
   return out;
 }
 function normUrl(u){
-  var s=String(u||"").trim(); if(!s) return "";
+  var s=String(u||"").trim();if(!s)return "";
   if(/^https?:\/\//i.test(s)){
     try{
-      var x=new URL(s); x.hash="";
-      var drop=[]; x.searchParams.forEach(function(v,k){if(/^utm_|^(fbclid|gclid|ref|source)$/i.test(k))drop.push(k)});
+      var x=new URL(s);x.hash="";
+      var drop=[];x.searchParams.forEach(function(v,k){if(/^utm_|^(fbclid|gclid|ref|source)$/i.test(k))drop.push(k)});
       drop.forEach(function(k){x.searchParams.delete(k)});
       var qs=x.searchParams.toString();
       return x.host.replace(/^www\./i,"").toLowerCase()+x.pathname.replace(/\/+$/,"")+(qs?"?"+qs:"");
@@ -309,12 +309,10 @@ function rotate(h,deg){
   return rgb2hex([(p[0]+m)*255,(p[1]+m)*255,(p[2]+m)*255]);
 }
 function palette(t){
-  var bg=t.bg,ac=t.accent,dark=lum(bg)<0.35,far=dark?"#FFFFFF":"#000000";
-  var a2=rotate(ac,-40);
+  var bg=t.bg,ac=t.accent,dark=lum(bg)<0.35,far=dark?"#FFFFFF":"#000000",a2=rotate(ac,-40);
   return {bg:bg,panel:mix(bg,far,dark?0.07:0.035),ink:mix(bg,far,dark?0.93:0.87),
     dim:mix(bg,far,0.48),edge:mix(bg,far,dark?0.2:0.13),frontier:mix(bg,far,dark?0.11:0.06),
-    accent:ac,accent2:a2,onaccent:onColor(ac),onaccent2:onColor(a2),
-    onfill:dark?"#FFFFFF":"#000000"};
+    accent:ac,accent2:a2,onaccent:onColor(ac),onaccent2:onColor(a2),onfill:dark?"#FFFFFF":"#000000"};
 }
 
 /* ---------- 通信 ---------- */
@@ -322,12 +320,12 @@ function parseRes(r){
   return r.text().then(function(t){
     var s=t.trim();
     if(s.charAt(0)==="<")
-      throw new Error("JSONではなくHTMLが返りました。GASの公開設定が「全員」か、URLの末尾が /exec か、スクリプトにエラーがないかを確認してください。");
-    try{ return JSON.parse(s); }catch(e){ throw new Error("返事を読めませんでした"); }
+      throw new Error("JSONではなくHTMLが返りました。GASの公開設定が「全員」か、URL末尾が /exec か、スクリプトにエラーがないか確認してください。");
+    try{return JSON.parse(s)}catch(e){throw new Error("返事を読めませんでした")}
   });
 }
 function api(action,payload){
-  if(!GAS_URL) return Promise.reject(new Error("保存先が未設定です"));
+  if(!GAS_URL)return Promise.reject(new Error("保存先が未設定です"));
   if(action==="get")
     return fetch(GAS_URL+"?pass="+encodeURIComponent(me.pass)+"&t="+Date.now()).then(parseRes)
       .then(function(j){if(j&&j.ok===false)throw new Error(j.error||"読み込めません");return j});
@@ -341,42 +339,41 @@ function pull(){
       ["domains","axes","stages","situations","themes","fonts"].forEach(function(k){if(j[k]&&j[k].length)data[k]=j[k]});
       data.cards=j.cards||[];data.summaries=j.summaries||{};data.echoes=j.echoes||[];
       data.texts=j.texts||{};data.fixCounts=j.fixCounts||{};
-      LS.set("rfl4_cache",JSON.stringify(data));loadErr="";
+      LS.set("rfl5_cache",JSON.stringify(data));loadErr="";
     }
     render();
   }).catch(function(e){loadErr=e.message;render()});
 }
 
 /* ---------- 計算 ---------- */
-function inLens(c){
-  if(lens.type==="all") return true;
-  var l=lens.type==="stage"?(c.stages||[]):(c.situations||[]);
-  if(l.indexOf(lens.id)<0) return false;
-  if(c.conf==="低"&&!c.fixed) return false;
-  return true;
-}
-function at(d,a){return data.cards.filter(function(c){return c.d===d&&c.a===a&&inLens(c)})}
+function at(d,a){return data.cards.filter(function(c){return c.d===d&&c.a===a})}
 function density(cards){
-  var n=cards.length; if(!n) return {s:0,n:0,people:0,srcs:0};
-  var people=new Set(cards.map(function(c){return c.author})).size;
-  var set=new Set();
+  var n=cards.length;if(!n)return {s:0,n:0,people:0,srcs:0};
+  var people=new Set(cards.map(function(c){return c.author})).size,set=new Set();
   cards.forEach(function(c){srcListOf(c).forEach(function(u){var k=normUrl(u);if(k)set.add(k)})});
   var srcs=set.size,sc=n+people*2+srcs*1.5;
   return {s:sc>=14?4:sc>=9?3:sc>=5?2:1,n:n,people:people,srcs:srcs};
+}
+function stageCount(cards,id,kind){
+  return cards.filter(function(c){
+    var l=kind==="stage"?(c.stages||[]):(c.situations||[]);
+    if(l.indexOf(id)<0)return false;
+    return !(c.conf==="低"&&!c.fixed);
+  }).length;
 }
 function openQAt(d,a){
   var ans=new Set(data.cards.map(function(c){return c.answers}).filter(Boolean));
   return data.cards.filter(function(c){return c.d===d&&c.a===a&&c.q&&!ans.has(c.id)});
 }
 function nudge(z,hasSum){
-  if(z.s===0) return "ここはまだ白いまま。最初の1枚を置くと +15。";
-  if(z.people===1) return "いまは1人だけ。ほかの人が1枚足すと、ぐっと濃くなります。";
-  if(z.srcs<3) return "出どころがあと"+(3-z.srcs)+"件増えると、しっかり調べた状態になります。";
-  if(!hasSum&&z.s>=3) return "十分たまりました。Lv4の人が要約を書くと「まとまった」になります。";
+  if(z.s===0)return "ここはまだ誰も見ていません。最初の1枚を置くと +15。";
+  if(z.people===1)return "いまは1人だけが見ています。ほかの人が1枚足すと、見え方が変わります。";
+  if(z.srcs<3)return "出どころがあと"+(3-z.srcs)+"件増えると、いろんな資料で確かめた状態になります。";
+  if(!hasSum&&z.s>=3)return "十分たまりました。Lv4の人が要約を書けます。";
   return "ここは外に出せる材料になっています。";
 }
 function myExp(){
-  if(!me.name) return 0;
+  if(!me.name)return 0;
   var mine=data.cards.filter(function(c){return c.author===me.name});
   var e=mine.reduce(function(s,c){return s+(Number(c.pts)||0)},0);
   var ids=new Set(mine.map(function(c){return c.id}));
@@ -384,8 +381,9 @@ function myExp(){
   e+=(data.fixCounts[me.name]||0)*5;
   return e;
 }
+function myCards(){return data.cards.filter(function(c){return c.author===me.name}).length}
 function myLevel(){var e=myExp(),l=LEVELS[0];LEVELS.forEach(function(x){if(e>=x.need)l=x});return l}
-function labelOf(list,id){var x=list.filter(function(v){return v.id===id})[0];return x?x.label:id}
+function labelOf(list,id){var x=list.filter(function(v){return v.id===id})[0];return x?x.label:null}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function linkify(u){var s=esc(u);return /^https?:\/\//i.test(u)?'<a href="'+s+'" target="_blank" rel="noopener noreferrer">'+s+'</a>':s}
@@ -404,14 +402,24 @@ function applyTheme(){
   document.body.className=(authed?"":"gate ")+"tex-"+me.texture+(picking?" picking":"");
 }
 
+/* ---------- URL ---------- */
+function route(){
+  var h=location.hash.replace(/^#\/?/,"").split("/");
+  if(h[0]==="cell"&&h[1]&&h[2]) view={t:"cell",d:h[1],a:h[2]};
+  else view={t:"map"};
+  if(authed) render();
+}
+function goCell(d,a){location.hash="#/cell/"+d+"/"+a}
+function goMap(){location.hash="#/"}
+
 /* ---------- 表紙 ---------- */
 function renderGate(){
   applyTheme();
   var lit=[1,2,6,8,13,14,15,20];
   var h='<div class="gatewrap"><div class="gatemap">';
-  for(var i=0;i<24;i++) h+='<i class="'+(lit.indexOf(i)>=0?"on":"")+'"></i>';
+  for(var i=0;i<24;i++)h+='<i class="'+(lit.indexOf(i)>=0?"on":"")+'"></i>';
   h+='</div><h1 class="gatetitle">'+esc(BRAND.title)+'</h1>'
-    +'<p class="gatelead">'+BRAND.lead+'</p>'
+    +'<p class="gatelead">'+esc(BRAND.lead)+'</p>'
     +'<label>呼び名</label><input id="g_name" maxlength="12" value="'+esc(me.name)+'" placeholder="れい / みなみ / さくら">'
     +'<label>合言葉</label><input id="g_pass" type="password" value="'+esc(me.pass)+'" placeholder="運営からもらったことば">'
     +'<div style="margin-top:16px"><button class="primary" style="width:100%" onclick="doEnter()">'
@@ -432,53 +440,54 @@ function doEnter(){
   api("get").then(function(j){
     gateBusy=false;
     if(!j||!j.domains){gateErr="うまく読み込めませんでした。";renderGate();return}
-    authed=true;saveMe();LS.set("rfl4_authed","1");pull();
+    authed=true;saveMe();LS.set("rfl5_authed","1");route();pull();
   }).catch(function(e){
-    gateBusy=false;
-    gateErr=/合言葉/.test(e.message)?"合言葉がちがいます。":e.message;
-    renderGate();
+    gateBusy=false;gateErr=/合言葉/.test(e.message)?"合言葉がちがいます。":e.message;renderGate();
   });
 }
-function logout(){authed=false;me.pass="";saveMe();LS.set("rfl4_authed","0");close_();renderGate()}
+function logout(){authed=false;me.pass="";saveMe();LS.set("rfl5_authed","0");close_();renderGate()}
 
-/* ---------- 本体 ---------- */
-function render(){
-  if(!authed){renderGate();return}
-  applyTheme();
-  var lv=myLevel(),canExpand=lv.lv>=3;
-  var total=data.domains.length*data.axes.length,filled=0,cellS=[];
-  data.domains.forEach(function(d){data.axes.forEach(function(a){
-    var z=density(at(d.id,a.id));cellS.push(z.s);if(z.s>0)filled++})});
-  var white=total-filled;
-
-  var h='<div class="wrap"><div class="bar"><div class="brand">'+esc(BRAND.title)
+/* ---------- 画面 ---------- */
+function header(){
+  var lv=myLevel();
+  return '<div class="bar"><div class="brand" onclick="goMap()">'+esc(BRAND.title)
     +'<small>'+esc(BRAND.sub)+'</small></div><div class="spacer"></div>'
     +'<button class="ghost" onclick="open_(\'me\')">Lv'+lv.lv+' '+esc(lvTitle(lv))+'</button>'
     +'<button class="ghost" onclick="open_(\'look\')">見た目</button>'
-    +'<button class="ghost" onclick="pull()">更新</button></div>';
-  if(loadErr) h+='<p class="err">'+esc(loadErr)+' <button class="ghost" onclick="open_(\'setup\')">設定</button></p>';
+    +'<button class="ghost" onclick="pull()">更新</button></div>'
+    +(loadErr?'<p class="err">'+esc(loadErr)+' <button class="ghost" onclick="open_(\'setup\')">設定</button></p>':'');
+}
 
-  /* ヒーロー：数字ひとつ＋ゲージ */
-  h+='<div class="hero"><div class="herotop"><b>'+esc(BRAND.heroLabel)+'　'+white+' / '+total+'</b>'
-    +'<em>'+(lens.type==="all"?"ぜんぶ":esc(labelOf(lens.type==="stage"?data.stages:data.situations,lens.id))+" で見ています")+'</em></div>'
-    +'<div class="bigbar">';
-  cellS.forEach(function(s){h+='<i class="'+(s?"f"+s:"")+'"></i>'});
-  h+='</div><div class="herofoot">ひとマスが「困りごと × 時期」ひとつ分。'
-    +'<b>白いマスは、まだ誰も調べていない＝守れていない場所</b>です。色が濃いほど、たくさんの人と資料で調べられています。</div></div>';
+function render(){
+  if(!authed){renderGate();return}
+  applyTheme();
+  if(view.t==="cell") renderCell(); else renderMap();
+  renderModal();
+}
 
-  /* レンズ */
-  h+='<div class="lensblock"><div class="lenslabel">だれの目で見る？</div><div class="lensrow">'
-    +'<button class="lens" aria-pressed="'+(lens.type==="all")+'" onclick="setLens(\'all\',\'\')">ぜんぶ</button>';
-  data.stages.forEach(function(s){h+='<button class="lens" aria-pressed="'+(lens.type==="stage"&&lens.id===s.id)+'" onclick="setLens(\'stage\',\''+s.id+'\')">'+esc(s.label)+'</button>'});
-  h+='</div><div class="lenslabel">こういう状況の人</div><div class="lensrow">';
-  data.situations.forEach(function(s){h+='<button class="lens" aria-pressed="'+(lens.type==="situation"&&lens.id===s.id)+'" onclick="setLens(\'situation\',\''+s.id+'\')">'+esc(s.label)+'</button>'});
-  h+='</div></div>';
+function renderMap(){
+  var lv=myLevel(),canExpand=lv.lv>=3;
+  var h='<div class="wrap">'+header();
+
+  /* はじめかた */
+  if(myCards()===0||!me.seenGuide){
+    h+='<div class="guide"><h2>はじめかた</h2>'
+      +'<p>ひとマスが「困りごと × 時期」ひとつぶん。気になったマスに、調べたことを貼っていきます。'
+      +'ひとりで全部やる必要はありません。1日1枚で十分です。</p>'
+      +'<div class="steps">'
+      +'<div class="step"><i>1</i><div>気になるマスを1つえらぶ（うすい色のマスほど、まだ誰も見ていません）</div></div>'
+      +'<div class="step"><i>2</i><div>読んだページの<b>URLを貼る</b>。本文はコピペのままでOK。まとめなくて大丈夫</div></div>'
+      +'<div class="step"><i>3</i><div>わからなかったことを一言残す。それが次の人へのバトンになります</div></div>'
+      +'</div><button class="primary" onclick="startPick()">マスをえらぶ</button>'
+      +(myCards()>0?'<div style="text-align:center;margin-top:9px"><button class="guidelink" onclick="hideGuide()">もう出さない</button></div>':'')
+      +'</div>';
+  } else {
+    h+='<p class="empty" style="margin:-4px 0 10px"><button class="guidelink" onclick="showGuide()">つかいかたを見る</button></p>';
+  }
 
   if(picking) h+='<div class="pickbanner">どこのこと？ 地図のマスをえらんでね<button onclick="cancelPick()">やめる</button></div>';
 
-  /* 盤面 */
-  var cols="clamp(56px,17vw,86px) repeat("+(data.axes.length+(canExpand?1:0))+",minmax(0,1fr))";
-  h+='<div class="boardbox"><div class="grid" style="grid-template-columns:'+cols+'"><div class="hd"></div>';
+  h+='<div class="boardbox"><div class="grid" style="--ncol:'+(data.axes.length+(canExpand?1:0))+'"><div class="hd"></div>';
   data.axes.forEach(function(a){h+='<div class="hd">'+esc(a.label)+'</div>'});
   if(canExpand) h+='<div class="hd">＋</div>';
   data.domains.forEach(function(d){
@@ -490,57 +499,129 @@ function render(){
         +'aria-label="'+esc(d.label+" × "+a.label+"、"+FILL[z.s]+"、カード"+z.n+"枚")+'">'
         +(nq?'<span class="qmark">❓</span>':'<span class="qmark"></span>')+(z.s?g:'')+'</button>';
     });
-    if(canExpand) h+='<button class="cell new" onclick="open_(\'addAxis\')"></button>';
+    if(canExpand) h+='<button class="cell new" onclick="open_(\'addAxis\')" aria-label="時期を足す"></button>';
   });
   if(canExpand){
-    h+='<div class="rowhd" style="opacity:.5">＋</div>';
-    data.axes.forEach(function(){h+='<button class="cell new" onclick="open_(\'addDomain\')"></button>'});
+    h+='<div class="rowhd" style="opacity:.5;background:none">＋</div>';
+    data.axes.forEach(function(){h+='<button class="cell new" onclick="open_(\'addDomain\')" aria-label="領域を足す"></button>'});
     h+='<div></div>';
   }
   h+='</div><div class="legend">';
   FILL.forEach(function(s,i){
     h+='<span><i style="background:'+(i===0?"var(--frontier)":"color-mix(in srgb,var(--accent) "+[0,30,55,78,100][i]+"%,var(--frontier))")+'"></i>'+s+'</span>'});
-  h+='<span>❓ わからないことが残っているマス</span></div>'
-    +'<div class="note">'+(canExpand?"破線のマスを押すと、新しい領域を自分で足せます。"
+  h+='<span>❓ わからないことが残っている</span></div>'
+    +'<div class="note">'+(canExpand?"破線のマスを押すと、新しい領域や時期を自分で足せます。"
       :"いまの地図は最初の8つだけ。Lv3になると、外側の白紙を自分たちで広げられます。")+'</div></div>';
 
   if(data.echoes.length){
-    h+='<div style="margin-top:16px"><div class="lenslabel">外での反響</div>';
+    h+='<div class="sect" style="margin-top:12px"><div class="secth">外での反響</div>';
     data.echoes.slice().reverse().slice(0,5).forEach(function(e){
       h+='<div class="qbox">📣 '+esc(e.what)+'<div class="meta">'+esc(e.where)+'</div></div>'});
     h+='</div>';
   }
-  h+='<p class="empty" style="margin-top:18px">地図・カード・判定の直しは、みんなで共有しています。見た目と呼び名は、あなたの端末だけ。'
+  h+='<p class="empty" style="margin-top:16px">地図・カード・見立ての直しは、みんなで共有しています。'
     +'<br><button class="ghost" style="margin-top:8px" onclick="open_(\'setup\')">保存先の設定</button> '
     +'<button class="ghost" style="margin-top:8px" onclick="logout()">出る</button></p></div>'
     +'<button class="fab" onclick="startPick()">＋ カードを出す</button>';
   document.getElementById("app").innerHTML=h;
-  renderModal();
 }
 
-function setLens(t,id){lens={type:t,id:id};render()}
-function startPick(){picking=true;render();window.scrollTo({top:0,behavior:"smooth"})}
-function cancelPick(){picking=false;render()}
-function tapCell(d,a){if(picking){picking=false;openCard(d,a,"");return}open_("cell",{d:d,a:a})}
-function open_(t,x){modal=Object.assign({t:t},x||{});renderModal()}
-function close_(){modal=null;renderModal()}
-function openCard(d,a,ans){open_("card",{d:d,a:a,answers:ans||""})}
-function toast(m){document.getElementById("toast").innerHTML='<div class="toast">'+esc(m)+'</div>';
-  setTimeout(function(){document.getElementById("toast").innerHTML=""},5000)}
-function val(id){var e=document.getElementById(id);return e?e.value:""}
+function renderCell(){
+  var dL=labelOf(data.domains,view.d),aL=labelOf(data.axes,view.a);
+  if(!dL||!aL){
+    document.getElementById("app").innerHTML='<div class="wrap">'+header()
+      +'<div class="sect"><div class="secth">この場所は見つかりませんでした</div>'
+      +'<p class="sectp">地図が作りかえられて、なくなった可能性があります。</p>'
+      +'<button class="primary" onclick="goMap()">地図にもどる</button></div></div>';
+    return;
+  }
+  var cards=at(view.d,view.a),z=density(cards),sum=data.summaries[view.d+"|"+view.a],qs=openQAt(view.d,view.a),lv=myLevel();
+  var h='<div class="wrap">'+header()
+    +'<button class="back" onclick="goMap()">← 地図にもどる</button>'
+    +'<div class="cellhead"><h1>'+esc(dL)+' × '+esc(aL)+'</h1>'
+    +'<div class="meter">';
+  for(var i=1;i<=4;i++)h+='<i class="'+(i<=z.s?"on":"")+'"></i>';
+  h+='</div><p class="state"><b>'+FILL[z.s]+'</b>　カード '+z.n+'枚 ／ '+z.people+'人 ／ 出どころ '+z.srcs+'件<br>'
+    +esc(nudge(z,!!sum))+'</p></div>';
+
+  /* 誰の目で見えているか */
+  h+='<div class="sect"><div class="secth">この場所は、誰の目で見えている？</div>'
+    +'<p class="sectp">集まったカードをAIが読んで、どの人の状況について書かれているかを見立てた結果です。'
+    +'<b>ゼロのところは、この場所についてその人のことがまだ調べられていない</b>ということ。</p>';
+  var mx=1;
+  data.stages.forEach(function(s){mx=Math.max(mx,stageCount(cards,s.id,"stage"))});
+  data.stages.forEach(function(s){
+    var n=stageCount(cards,s.id,"stage");
+    h+='<div class="srow'+(n?"":" zero")+'"><span>'+esc(s.label)+'</span>'
+      +'<div class="b"><i style="width:'+(n?Math.round(n/mx*100):0)+'%"></i></div>'
+      +'<em>'+(n?n+"枚":"まだゼロ")+'</em></div>';
+  });
+  h+='</div><div class="sect"><div class="secth">こういう状況の人については？</div><p class="sectp">同じく、AIの見立てです。</p>';
+  var mx2=1;
+  data.situations.forEach(function(s){mx2=Math.max(mx2,stageCount(cards,s.id,"situation"))});
+  data.situations.forEach(function(s){
+    var n=stageCount(cards,s.id,"situation");
+    h+='<div class="srow'+(n?"":" zero")+'"><span>'+esc(s.label)+'</span>'
+      +'<div class="b"><i style="width:'+(n?Math.round(n/mx2*100):0)+'%"></i></div>'
+      +'<em>'+(n?n+"枚":"まだゼロ")+'</em></div>';
+  });
+  h+='</div>';
+
+  if(qs.length){
+    h+='<div class="sect"><div class="secth">ここに残っている「わからない」</div>'
+      +'<p class="sectp">誰かが調べてくれるのを待っています。</p>';
+    qs.forEach(function(c){
+      h+='<div class="qbox">'+esc(c.q)+'<div class="meta">'+esc(c.author)+'</div>'
+        +(c.author!==me.name?'<button class="take" onclick="openCard(\''+view.d+'\',\''+view.a+'\',\''+c.id+'\')">これ、調べてみる（+12）</button>':'')+'</div>';
+    });
+    h+='</div>';
+  }
+
+  if(sum) h+='<div class="sect"><div class="secth">まとめ</div><div class="qbox" style="border-left-color:var(--accent)">'
+    +esc(sum.text)+'<div class="meta">'+esc(sum.by)+'</div></div></div>';
+
+  h+='<div class="sect"><div class="secth">集まっているカード（'+cards.length+'）</div>';
+  if(!cards.length) h+='<p class="sectp">まだ1枚もありません。最初の1枚を置くと +15 です。</p>';
+  cards.forEach(function(c){
+    h+='<div class="card"><p class="raw">'+esc(c.raw)+'</p><ul class="srclist src">';
+    srcListOf(c).forEach(function(u){h+='<li>📎 '+linkify(u)+'</li>'});
+    h+='</ul><p class="src">'+esc(c.author)+'</p>'+judgeHTML(c);
+    (c.comments||[]).forEach(function(cm){h+='<p class="src" style="margin-top:6px">💬 '+esc(cm.by)+'：'+esc(cm.text)+'</p>'});
+    if(lv.lv>=2) h+='<div style="display:flex;gap:6px;margin-top:8px"><input id="cm_'+c.id+'" placeholder="コメント">'
+      +'<button class="take" style="margin-top:0" onclick="doComment(\''+c.id+'\')">送る</button></div>';
+    h+='</div>';
+  });
+  if(lv.lv>=4&&cards.length) h+='<label>このマスをまとめる</label><textarea id="f_sum" rows="4"></textarea>'
+    +'<button class="take" onclick="doSummary()">まとめる</button>';
+  h+='</div></div><button class="fab" onclick="openCard(\''+view.d+'\',\''+view.a+'\',\'\')">＋ ここに置く</button>';
+  document.getElementById("app").innerHTML=h;
+}
 
 function judgeHTML(c){
-  var st=(c.stages||[]).map(function(i){return labelOf(data.stages,i)});
-  var sg=(c.situations||[]).map(function(i){return labelOf(data.situations,i)});
+  var st=(c.stages||[]).map(function(i){return labelOf(data.stages,i)}).filter(Boolean);
+  var sg=(c.situations||[]).map(function(i){return labelOf(data.situations,i)}).filter(Boolean);
   var b=st.length||sg.length?'<b>'+esc(st.concat(sg).join("・"))+'</b>':'<b>あてはまるものなし</b>';
   return '<div class="judge">🤖 AIの見立て：'+b+(c.conf?'（確信度 '+esc(c.conf)+'）':'')
     +(c.fixed?' <span class="fixed">✏️ 人が直しました</span>':'')
     +(c.why?'<span class="why">'+esc(c.why)+'</span>':'')
     +'<div><button class="take" onclick="open_(\'correct\',{cardId:\''+c.id+'\'})">ちがう気がする</button></div></div>';
 }
-function sheetWrap(body,foot){
+
+function setLensNoop(){}
+function startPick(){picking=true;goMap();render();window.scrollTo({top:0,behavior:"smooth"})}
+function cancelPick(){picking=false;render()}
+function hideGuide(){me.seenGuide=true;saveMe();render()}
+function showGuide(){me.seenGuide=false;saveMe();render();window.scrollTo({top:0,behavior:"smooth"})}
+function tapCell(d,a){if(picking){picking=false;goCell(d,a);setTimeout(function(){openCard(d,a,"")},80);return}goCell(d,a)}
+function open_(t,x){modal=Object.assign({t:t},x||{});renderModal()}
+function close_(){modal=null;renderModal()}
+function openCard(d,a,ans){open_("card",{d:d,a:a,answers:ans||""})}
+function toast(m){document.getElementById("toast").innerHTML='<div class="toast">'+esc(m)+'</div>';
+  setTimeout(function(){document.getElementById("toast").innerHTML=""},5000)}
+function val(id){var e=document.getElementById(id);return e?e.value:""}
+function sheetWrap(b,f){
   return '<div class="scrim" onclick="if(event.target===this)close_()"><div class="sheet">'
-    +'<div class="sheetbody">'+body+'</div>'+(foot?'<div class="sheetfoot">'+foot+'</div>':'')+'</div></div>';
+    +'<div class="sheetbody">'+b+'</div>'+(f?'<div class="sheetfoot">'+f+'</div>':'')+'</div></div>';
 }
 
 function renderModal(){
@@ -556,7 +637,7 @@ function renderModal(){
 
   if(modal.t==="card"){
     body='<h3>'+(modal.answers?"わからないに答える":"調べたことを置く")+'</h3>'
-      +'<p class="sub">'+esc(labelOf(data.domains,modal.d))+' × '+esc(labelOf(data.axes,modal.a))
+      +'<p class="sub">'+esc(labelOf(data.domains,modal.d)||"")+' × '+esc(labelOf(data.axes,modal.a)||"")
       +'<br>整理しなくて大丈夫。読んだところをそのまま貼ってください。</p>'
       +'<label>'+esc(T("card.src"))+'</label>'
       +'<textarea id="f_src" rows="3" placeholder="https://example.jp/a&#10;内閣府の報告書 p.32"></textarea>'
@@ -567,39 +648,9 @@ function renderModal(){
     foot='<button class="cancel" onclick="close_()">やめる</button><button class="primary" id="btn_submit" onclick="doCard()">地図に置く</button>';
   }
 
-  if(modal.t==="cell"){
-    var cards=at(modal.d,modal.a),z=density(cards),sum=data.summaries[modal.d+"|"+modal.a],qs=openQAt(modal.d,modal.a);
-    body='<h3>'+esc(labelOf(data.domains,modal.d))+' × '+esc(labelOf(data.axes,modal.a))+'</h3>'
-      +(lens.type!=="all"?'<p class="sub" style="margin-bottom:6px">🔍 '+esc(labelOf(lens.type==="stage"?data.stages:data.situations,lens.id))+' で絞り込み中</p>':'')
-      +'<div class="meter">';
-    for(var i=1;i<=4;i++) body+='<i class="'+(i<=z.s?"on":"")+'"></i>';
-    body+='</div><p class="sub"><b>'+FILL[z.s]+'</b>　カード '+z.n+'枚 ／ '+z.people+'人 ／ 出どころ '+z.srcs+'件<br>'+esc(nudge(z,!!sum))+'</p>';
-    if(qs.length){
-      body+='<div class="lenslabel">このマスに残っている「わからない」</div>';
-      qs.forEach(function(c){
-        body+='<div class="qbox">'+esc(c.q)+'<div class="meta">'+esc(c.author)+'</div>'
-          +(c.author!==me.name?'<button class="take" onclick="openCard(\''+modal.d+'\',\''+modal.a+'\',\''+c.id+'\')">これ、調べてみる（+12）</button>':'')+'</div>';
-      });
-    }
-    if(sum) body+='<div class="qbox" style="border-left-color:var(--accent)"><b>まとめ</b><br>'+esc(sum.text)+'<div class="meta">'+esc(sum.by)+'</div></div>';
-    cards.forEach(function(c){
-      body+='<div class="card"><p class="raw">'+esc(c.raw)+'</p><ul class="srclist src">';
-      srcListOf(c).forEach(function(u){body+='<li>📎 '+linkify(u)+'</li>'});
-      body+='</ul><p class="src">'+esc(c.author)+'</p>'+judgeHTML(c);
-      (c.comments||[]).forEach(function(cm){body+='<p class="src" style="margin-top:6px">💬 '+esc(cm.by)+'：'+esc(cm.text)+'</p>'});
-      if(lv.lv>=2) body+='<div style="display:flex;gap:6px;margin-top:8px"><input id="cm_'+c.id+'" placeholder="コメント">'
-        +'<button class="take" style="margin-top:0" onclick="doComment(\''+c.id+'\')">送る</button></div>';
-      body+='</div>';
-    });
-    if(lv.lv>=4&&cards.length) body+='<label>このマスをまとめる</label><textarea id="f_sum" rows="4"></textarea>'
-      +'<button class="take" onclick="doSummary()">まとめる</button>';
-    foot='<button class="cancel" onclick="close_()">閉じる</button>'
-      +'<button class="primary" onclick="openCard(\''+modal.d+'\',\''+modal.a+'\')">ここに置く</button>';
-  }
-
   if(modal.t==="correct"){
     var c2=cardById(modal.cardId)||{},cur=(c2.stages||[]).concat(c2.situations||[]);
-    body='<h3>AIの見立てを直す</h3><p class="sub">AIはよく間違えます。直した記録が、AIの判定基準そのものを作りなおす材料になります。</p>'
+    body='<h3>AIの見立てを直す</h3><p class="sub">AIはよく間違えます。直した記録が、AIの見立て方そのものを作りなおす材料になります。</p>'
       +'<p class="src" style="margin-bottom:10px">'+esc((c2.raw||"").slice(0,120))+'…</p>'
       +'<label>あてはまるものを選びなおす（複数可・ゼロでもOK）</label><div class="chips">';
     data.stages.concat(data.situations).forEach(function(s){
@@ -607,8 +658,7 @@ function renderModal(){
     body+='</div><label style="margin-top:14px">なぜ ちがう？</label>';
     REASONS.forEach(function(r,i){
       body+='<label class="radio"><input type="radio" name="why" value="'+esc(r)+'" id="why'+i+'">'+esc(r)+'</label>'});
-    body+='<label>ひとこと（「その他」のときは必須）</label><input id="f_note">'
-      +'<p class="err" id="fixErr"></p>';
+    body+='<label>ひとこと（「その他」のときは必須）</label><input id="f_note"><p class="err" id="fixErr"></p>';
     foot='<button class="cancel" onclick="close_()">やめる</button><button class="primary" id="btn_fix" onclick="doCorrect()">直す（+5）</button>';
   }
 
@@ -625,13 +675,12 @@ function renderModal(){
     LEVELS.forEach(function(l){if(!next&&l.need>exp)next=l});
     var pct=next?Math.min(100,Math.round((exp-lv.need)/(next.need-lv.need)*100)):100;
     body='<h3>Lv'+lv.lv+'　'+esc(lvTitle(lv))+'</h3>'
-      +'<div class="meter"><i class="on" style="flex:'+pct+'"></i><i style="flex:'+(100-pct)+'"></i></div>'
+      +'<div class="meter"><i class="on" style="flex:'+Math.max(pct,1)+'"></i><i style="flex:'+Math.max(100-pct,1)+'"></i></div>'
       +'<p class="sub">'+exp+' pt'+(next?'／ Lv'+next.lv+' まで あと '+(next.need-exp)+' pt':'／ いちばん先まで来ました')+'</p>';
     if(next) body+='<div class="unlock"><b>Lv'+next.lv+' になると</b><br>'+esc(next.unlock)+'</div>';
     body+='<label>ポイントが入るとき</label>';
     POINT_RULES.forEach(function(r){body+='<div class="rule"><span>'+esc(r[0])+'</span><b>'+r[1]+'</b></div>'});
-    body+='<p class="src" style="margin-top:10px">レベルは えらい順ではありません。'
-      +'<b>できることが増える鍵</b>です。地図そのものを作りかえる権限は、たくさん調べた人から順に開きます。</p>'
+    body+='<p class="src" style="margin-top:10px">レベルはえらい順ではありません。<b>できることが増える鍵</b>です。</p>'
       +'<label style="margin-top:18px">呼び名</label><input id="f_myname" maxlength="12" value="'+esc(me.name)+'">'
       +'<label style="margin-top:16px">外での反響を記録する</label>'
       +'<input id="f_what" placeholder="何が使われたか"><div style="height:6px"></div>'
@@ -673,21 +722,22 @@ function updateSrcCount(){
 }
 function pick(k,v){me[k]=v;saveMe();authed?render():renderGate()}
 function toggleChip(id){var b=document.getElementById("ck_"+id);b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true")}
-function doSetup(){GAS_URL=val("f_gas").trim();LS.set("rfl4_gas",GAS_URL);close_();authed?pull():renderGate()}
+function doSetup(){GAS_URL=val("f_gas").trim();LS.set("rfl5_gas",GAS_URL);close_();authed?pull():renderGate()}
 function doMe(){me.name=val("f_myname").trim()||me.name;saveMe();close_();render()}
 function doCard(){
   var list=splitSources(val("f_src")),raw=val("f_raw").trim(),err=document.getElementById("cardErr");
   if(!list.length){err.textContent="①の出どころを入れてください。ここだけは省けません。";return}
   if(!raw){err.textContent="②に、調べたことを貼ってください。";return}
-  var before=density(data.cards.filter(function(c){return c.d===modal.d&&c.a===modal.a}));
+  var before=density(at(modal.d,modal.a));
   var pts=10+(before.s===0?15:before.s<=1?5:0)+(modal.answers?12:0);
   var b=document.getElementById("btn_submit");b.disabled=true;b.textContent="AIが読んでいます…";err.textContent="";
-  api("addCard",{d:modal.d,a:modal.a,src:list.join("\n"),raw:raw,q:val("f_q").trim(),pts:pts,answers:modal.answers||""})
+  var d=modal.d,a=modal.a;
+  api("addCard",{d:d,a:a,src:list.join("\n"),raw:raw,q:val("f_q").trim(),pts:pts,answers:modal.answers||""})
     .then(function(j){
-      flash=modal.d+modal.a;setTimeout(function(){flash="";render()},600);
-      var msg=before.s===0?"🗺 "+me.name+" が【"+labelOf(data.domains,modal.d)+" × "+labelOf(data.axes,modal.a)+"】をはじめて塗りました。+"+pts
-                          :labelOf(data.domains,modal.d)+" × "+labelOf(data.axes,modal.a)+" が濃くなりました。+"+pts;
-      if(j.judged===false) msg+="（AIの見立てはあとで入ります）";
+      flash=d+a;setTimeout(function(){flash="";render()},600);
+      var msg=before.s===0?"🗺 "+me.name+" が【"+labelOf(data.domains,d)+" × "+labelOf(data.axes,a)+"】をはじめて塗りました。+"+pts
+                          :labelOf(data.domains,d)+" × "+labelOf(data.axes,a)+" が濃くなりました。+"+pts;
+      if(j.judged===false)msg+="（AIの見立てはあとで入ります）";
       close_();toast(msg);return pull();
     })
     .catch(function(e){
@@ -699,7 +749,7 @@ function doCorrect(){
   var after=[],err=document.getElementById("fixErr");
   data.stages.concat(data.situations).forEach(function(s){
     var b=document.getElementById("ck_"+s.id);
-    if(b&&b.getAttribute("aria-pressed")==="true") after.push(s.id);
+    if(b&&b.getAttribute("aria-pressed")==="true")after.push(s.id);
   });
   var why=(document.querySelector('input[name="why"]:checked')||{}).value||"",note=val("f_note").trim();
   if(!why){err.textContent="「なぜ ちがう？」を選んでください。";return}
@@ -711,13 +761,12 @@ function doCorrect(){
 }
 function doComment(id){
   var t=val("cm_"+id).trim();if(!t)return;
-  var d=modal.d,a=modal.a;
   api("addComment",{cardId:id,text:t}).then(function(){toast("コメントを残しました。");return pull()})
-    .then(function(){open_("cell",{d:d,a:a})}).catch(function(e){toast("送れませんでした："+e.message)});
+    .catch(function(e){toast("送れませんでした："+e.message)});
 }
 function doSummary(){
   var t=val("f_sum").trim();if(!t)return;
-  api("addSummary",{key:modal.d+"|"+modal.a,text:t}).then(function(){close_();toast("まとめました。");return pull()})
+  api("addSummary",{key:view.d+"|"+view.a,text:t}).then(function(){toast("まとめました。");return pull()})
     .catch(function(e){toast("送れませんでした："+e.message)});
 }
 function doAdd(kind){
@@ -731,9 +780,11 @@ function doEcho(){
     .catch(function(e){toast("送れませんでした："+e.message)});
 }
 
+window.addEventListener("hashchange",route);
 (function(){
   loadMe();
-  var c=LS.get("rfl4_cache");if(c){try{data=Object.assign(data,JSON.parse(c))}catch(e){}}
+  var c=LS.get("rfl5_cache");if(c){try{data=Object.assign(data,JSON.parse(c))}catch(e){}}
+  route();
   if(authed){render();pull()}else{renderGate()}
   setInterval(function(){if(authed&&!modal&&!picking)pull()},30000);
 })();
